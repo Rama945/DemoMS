@@ -29,5 +29,11 @@ public class Candidat implements Serializable {
 	private Date  dateNaissance;
 	private String email;
 	private String password;
+
+	public Candidat( String nom, String prenom , String mail){
+		this.nom=nom;
+		this.prenom=prenom;
+		this.email=email;
+	}
 	
 }
