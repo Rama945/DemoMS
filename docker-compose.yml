@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+ eurekaserver:
+   build: C:\Users\Manel\Desktop\eurekaServer
+   container_name: eurekaserver
+   image: eurekaserver
+   networks:
+      - eureka-server
+   ports:
+    - "8761:8761"
+
+ microservice-demo:
+   build: C:\Users\Manel\Desktop\DemoMS-master\ms_gestionCondidat\ms_gestionCondidat
+  #  network_mode: host 
+   image: msgestioncandidat
+   ports:
+   - "8081:8081"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.server-url.default-zone=http://eurekaserver:8761/eureka-service
+   depends_on:
+     - eurekaserver
+
+networks:
+  eureka-server:
+    name: eureka-server
+    driver: bridge
